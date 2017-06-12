@@ -1,0 +1,114 @@
+﻿
+@model WebApplication5.Models.ProjectProfile
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<style>
+    body {
+        background-size: cover;
+    }
+
+    .panel-default {
+        opacity: 0.9;
+        margin-top: 30px;
+    }
+
+    .form-group.last {
+        margin-bottom: 0px;
+    }
+</style>
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <fieldset>
+       <br />
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (@ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+
+
+        <div style="background-image: url(/images/right.png);background-repeat: no-repeat;"  class="container col-lg-offset-4">
+            <div class="row">
+                @*<div>
+                    <img class="cibc-logo" alt="CIBC logo" src="~/images/appinsight.png">
+                </div>*@
+                <div class="col-md-4 col-md-offset-7">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-4 control-label">ApplicationID</label>
+                                    <div class="col-sm-9">
+                                        @*<input type="text" class="form-control" id="inputEmail3" placeholder="App Id" required="">*@
+                                        @Html.TextBoxFor(a => a.Name, null, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(a => a.Name)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-4 control-label">ApplicationKey</label>
+                                    <div class="col-sm-9">
+                                        @*<input type="password" class="form-control" id="inputPassword3" placeholder="App Key" required="">*@
+                                       @Html.TextBoxFor(a => a.Key,null, new { @class= "form-control" })
+                                        @Html.ValidationMessageFor(a => a.Key)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        <div class="checkbox">
+                                            <label class="">
+                                                <p style="font-style:italic;color:red">@ViewBag.Error</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group last">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        <button type="submit" class="btn btn-success btn-sm">Enter</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*<table>
+            <tr>
+                <td>Application ID</td>
+                <td>@Html.TextBoxFor(a => a.Name)</td>
+                <td>@Html.ValidationMessageFor(a => a.Name)</td>
+            </tr>
+            <tr>
+                <td>
+                   Application Key
+                </td>
+                <td>
+                    @Html.TextBoxFor(a => a.Key)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.Key)
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><p style="font-style:italic;color:red">@ViewBag.Error</p></td>
+            </tr>
+<tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Submit" />
+                </td>
+                <td></td>
+            </tr>
+        </table>*@
+    </fieldset>
+}  
+

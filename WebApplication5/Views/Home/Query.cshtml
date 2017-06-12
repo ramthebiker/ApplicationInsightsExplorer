@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Query";
+}
+
+
+@using (Html.BeginForm("GetQueryLogs", "Home", FormMethod.Post))
+{
+    <br>
+    <form action="" method="post">
+        <div class="container col-lg-offset-4">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h2>Query</h2></div>
+                    <div class="panel-body">
+                        <div class="form-group">
+
+                            <div class="group1">
+                                <div class="left">
+                                    <label for="TimeSpan">TimeSpan:</label>
+                                </div>
+                                <div class="right">
+                                    <input type="text" class="form-control" name="timespan" id="timespan" value=@Request["timespan"]>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="group1">
+                                <div class="left">
+                                    <label for="Query">Query:</label>
+                                </div>
+                                <div class="right">
+                                    <textarea type="text" class="form-control" name="query" id="query" value=@Request["query"]>@Request["query"]</textarea>
+                                </div>
+                            </div>
+
+                            <br />
+                            <br />
+                            <div class="right">
+                                <button type="submit" class="btn btn-primary" value="GetQueryLogs" name="action:GetQueryLogs">View</button>
+                                <button type="submit" class="btn btn-danger" value="DownloadQueryLogs" name="action:DownloadQueryLogs">Download</button>
+                            </div>
+
+                            <br />
+                            <div class="form-group">
+                                <label for="comment">JSON Result:</label>
+
+                                <textarea class="form-control" rows="15" id="comment">  @ViewBag.Response</textarea>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </form>
+
+}

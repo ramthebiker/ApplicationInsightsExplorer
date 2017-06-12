@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Events";
+}
+
+<script>
+function CallChangefunc(val)
+{  
+  window.location.href="/Home/GetEventLogs?value="+val;
+}
+</script>
+<br>
+<div class="Events"></div>
+
+
+<form action="" method="post">
+    <div class="container col-lg-offset-4">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2>Event Logs</h2></div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-sm-2 view" style="vertical-align:bottom">
+                            <label for="sel1" class="view">Select EventType:</label>
+                        </div>
+                        <div class="col-sm-2">
+
+                            <select class="form-control" id="eventsID" name="eventsID">
+                                <option value=@Request["eventsID"]>@Request["eventsID"]</option>
+                                <option value="traces">traces</option>
+                                <option value="customEvents">customEvents</option>
+                                <option value="pageViews">pageViews</option>
+                                <option value="browserTimings">browserTimings</option>
+                                <option value="requests">requests</option>
+                                <option value="dependencies">dependencies</option>
+                                <option value="exceptions">exceptions</option>
+                                <option value="availabilityResults">availabilityResults</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary" value="GetEventLogs" name="action:GetEventLogs">View</button>
+                            <button type="submit" class="btn btn-danger" value="DownloadEventLogs" name="action:DownloadEventLogs">Download</button>
+
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+
+                    <div class="form-group">
+                        <label for="comment">JSON Result:</label>
+
+                        <textarea class="form-control" rows="15" id="comment">  @ViewBag.Response</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</form>

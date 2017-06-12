@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "Metrics";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(function () {
+        $('.dropdown-menu a').click(function () {
+            console.log($(this).attr('data-value'));
+            $(this).closest('.dropdown').find('input.timespan')
+                .val( $(this).attr('data-value') );
+        });
+    });
+
+    $(function () {
+        $('.dropdown-menu a').click(function () {
+            console.log($(this).attr('data-value'));
+            $(this).closest('.dropdown').find('input.interval')
+                .val($(this).attr('data-value'));
+        });
+    });
+</script>
+
+@using (Html.BeginForm("GetMetricLogs", "Home", FormMethod.Post))
+{<br>
+    <form action="" method="post">
+        <div class="container col-lg-offset-4">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h2>Metrics</h2></div>
+                    <div class="panel-body">
+                        <div class="form-group">
+
+                            <div class="group1">
+                                <div class="left">
+                                    <label for="sel1">Metrics ID:</label>
+                                </div>
+                                <div class="right">
+                                    <select class="form-control" id="metricsID" name="metricsID">
+                                        <option value=@Request["metricsID"]>@Request["metricsID"]</option>
+                                        <option value="requests/count">requests/count</option>
+                                        <option value="requests/duration">requests/duration</option>
+                                        <option value="requests/failed">requests/failed</option>
+                                        <option value="users/count">users/count</option>
+                                        <option value="users/authenticated">users/authenticated</option>
+                                        <option value="pageViews/count">pageViews/count</option>
+                                        <option value="pageViews/duration">pageViews/duration</option>
+                                        <option value="customEvents/count">customEvents/count</option>
+                                        <option value="browserTimings/processingDuration">browserTimings/processingDuration</option>
+                                        <option value="browserTimings/receiveDuration">browserTimings/receiveDuration</option>
+                                        <option value="browserTimings/networkDuration">browserTimings/networkDuration</option>
+                                        <option value="browserTimings/sendDuration">browserTimings/sendDuration</option>
+                                        <option value="browserTimings/totalDuration">browserTimings/totalDuration</option>
+                                        <option value="dependencies/count">dependencies/count</option>
+                                        <option value="dependencies/duration">dependencies/duration</option>
+                                        <option value="dependencies/failed">dependencies/failed</option>
+                                        <option value="exceptions/count">exceptions/count</option>
+                                        <option value="exceptions/browser">exceptions/browser</option>
+                                        <option value="exceptions/server">exceptions/server</option>
+                                        <option value="sessions/count">sessions/count</option>
+                                        <option value="performanceCounters/requestExecutionTime">performanceCounters/requestExecutionTime</option>
+                                        <option value="performanceCounters/requestsPerSecond">performanceCounters/requestsPerSecond</option>
+                                        <option value="performanceCounters/requestsInQueue">performanceCounters/requestsInQueue</option>
+                                        <option value="performanceCounters/memoryAvailableBytes">performanceCounters/memoryAvailableBytes</option>
+                                        <option value="performanceCounters/exceptionsPerSecond">performanceCounters/exceptionsPerSecond</option>
+                                        <option value="performanceCounters/processCpuPercentage">performanceCounters/processCpuPercentage</option>
+                                        <option value="performanceCounters/processIOBytesPerSecond">performanceCounters/processIOBytesPerSecond</option>
+                                        <option value="performanceCounters/processPrivateBytes">performanceCounters/processPrivateBytes</option>
+                                        <option value="performanceCounters/processorCpuPercentage">performanceCounters/processorCpuPercentage</option>
+                                        <option value="availabilityResults/count">availabilityResults/count</option>
+                                        <option value="availabilityResults/availabilityPercentage">availabilityResults/availabilityPercentage</option>
+                                        <option value="availabilityResults/duration">availabilityResults/duration</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="group1">
+                                <div class="left">
+                                    <label for="TimeSpan">TimeSpan:</label>
+                                </div>
+                                <div class="right">
+                                    @*<input type="text" class="form-control" name="timespan" id="timespan" value=@Request["timespan"]>*@
+                                    <div class="input-group dropdown">
+                                        <input type="text" class="form-control timespan dropdown-toggle" name="timespan" id="timespan" value=@Request["timespan"]>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" data-value="2017-06-05/2017-06-06">2017-06-05/2017-06-06 (Jun 5)</a></li>
+                                            <li><a href="#" data-value="PT12H" >PT12H (Last 12 Hours)</a></li>
+                                            <li><a href="#" data-value="P1D">P1D (Last 1 Day)</a></li>
+                                            <li><a href="#" data-value="P1DT12H">P1DT12H (Last 1.5 Days)</a></li>
+                                            <li><a href="#" data-value="P7D">P7D (Last 7 Days)</a></li>
+                                            <li><a href="#" data-value="2017-06-06/PT3H">2017-06-06/PT3H (3Hours, 3 Days ago)</a></li>
+                                        </ul>
+                                        <span role="button" class="input-group-addon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="group1">
+                                <div class="left">
+                                    <label for="Interval">Interval:</label>
+                                </div>
+                                <div class="right">
+                                    @*<input type="text" class="form-control" name="interval" id="interval" value=@Request["interval"]>*@
+
+                                    <div class="input-group dropdown">
+                                        <input type="text" class="form-control timespan dropdown-toggle" name="interval" id="interval" value=@Request["interval"]>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" data-value="PT30M">PT30M (30 Minutes)</a></li>
+                                            <li><a href="#" data-value="PT1H">PT1H (1 Hour)</a></li>
+                                            <li><a href="#" data-value="PT3H">PT3H (3 Hours)</a></li>                                           
+                                            <li><a href="#" data-value="P1D">P1D (1 Day)</a></li>
+                                          
+                                        </ul>
+                                        <span role="button" class="input-group-addon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="right">
+                                <button type="submit" class="btn btn-primary" value="GetMetricsLogs" name="action:GetMetricsLogs">View</button>
+                                <button type="submit" class="btn btn-danger" value="DownloadMetricsLogs" name="action:DownloadMetricsLogs">Download</button>
+
+                            </div>
+
+                            <br />
+                            <div class="form-group">
+                                <label for="comment">JSON Result:</label>
+
+                                <textarea class="form-control" rows="15" id="comment">  @ViewBag.Response</textarea>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </form>
+
+}
